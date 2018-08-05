@@ -1,12 +1,19 @@
-def hanoi(scale):
+def hanoi(scale, a, b, c):
     scale_i = int(scale)
+    global time
     if scale_i == 1:
-        result = 1
+        time += 1
+        print(time, ": Move no.", scale_i, "plate from", a, "to", c)
     else:
-        result = hanoi(1) + 2 * hanoi(scale_i - 1)
-    return int(result)
+        hanoi(scale_i - 1, a, c, b)
+        time += 1
+        print(time, ": Move no.", scale_i, "plate from", a, "to", c)
+        hanoi(scale_i - 1, b, a, c)
 
 
-n = input("Scale:")
+time = 0
+n = input("Number of plates:")
 
-print(hanoi(n))
+hanoi(n, 'A', 'B', 'C')
+
+print("Moving", n, "plates needs", time, "times")
